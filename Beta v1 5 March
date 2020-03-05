@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <errno.h>
+#include <wiringPi.h>
+#include <wiringSerial.h>
+
+
+//int main(int argc,char *argv[])
+int main()
+{
+
+int fd;
+//int count;
+//unsigned int nextTime;
+//char ch[100];
+int i;
+int n = 300;
+
+
+
+if((fd = serialOpen("/dev/ttyAMA0",9600)) <0 )
+        {
+            fprintf(stderr,"Activer port serie : %s \n", strerror(errno));
+            return 1;
+        }
+if (wiringPiSetup() == -1)
+        {
+            fprintf(stdout, "Activer Demmarage WiringPi : %s \n", strerror(errno));
+            return 1;
+        }
+//n=strlen(ch);
+serialPuts(fd,"\n");
+delay(50);
+serialPuts(fd,"en \n exit");
+printf("CCccccccccccccc1");
+for(i=0;i<n;i++)
+    {
+        printf("%c",serialGetchar(fd));
+
+    }
+printf("CCccccccccccccc2");
+//return 0;
+}
+
+/*
+    serialPuts(fd,"en \n");
+
+    while(serialDataAvail(fd) != 0 )
+        {
+
+            val=serialGetchar(fd);
+            serialPrintf(fd,val);
+            printf ("%d",val) ;
+        }
+    return 0;
+}
+*/
